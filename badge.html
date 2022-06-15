@@ -1,0 +1,41 @@
+<!--start-->
+<script>
+    window.lumapps.customize(({ targets, components, render, placement, constants }) => {
+        const { Card, RawHTML } = components;
+
+        var badgeDict = { 
+            0: "https://sites-us.lumapps.com/serve/AMIfv964NNw2B4HRmqi3U-Log3kKR4yoiduU2bDEfbVbcV54HzPGD2fO8BKtx7b1KmdZ_3AGxz74hZvX_A_vEr4Pki2DLK9h28KacIZzTSOJ4IAKKcpf2neyKVPagLUX-FwynwpaN_JjNb24gOSnDWOnMS1rgXpekO-XqsQVErR6KBenjMb96gXcDaaK_fohqVn-wg6WehLfJN14weoXUnnq8Ts5Ida3AfBSTCN3ulWGwxVmX7OYAeEnxOzbOoJFJ9z5ZW10vb3jLVrzK1e5gaaONrD7OC5Wfw/admin_badge.png|https://hive.lumapps.com/lumacademy-training-portal/lumapps-administrator-v2", //admin
+            1: "https://sites-us.lumapps.com/serve/AMIfv96TXweVi_z8r5QhuA5yrMDhr4JMiFSbWuuk2kz1-jj32vfNUPVGLiF3SLprCvVG4oL_NzbUt412FFLKx817S0TjfBi_aR8YwmxfOHIBL-AteocujNseqTA-zVKKkxwfkcbqc0Xi_FRyOnb7G2K2f8VikLMio3VZe45QqRBLQH6iJljj6xN1eMHlVIBjpHKiDG7ulAr-AV6Wp5v2eBHAo5c-war3CGmbcoO1vReykh7Ln2R83F5Pq8xBOzfY_1ldVZSvpxfeF9va0nkJ67RwC1eusoFWWA/architect_badge.png|https://hive.lumapps.com/lumacademy-training-portal/lumapps-architect", //architect
+            2: "https://sites-us.lumapps.com/serve/AMIfv971RkJivnlfQDeYJMEoouxJEZHqCqrWvflG0XeQY5pbnHHG9ZQFLD_3WJ1OBCpEKqo9ZbJjajWi80mhWJaVn9wLFOWBpT49J3CWFn2mKmBJLFETRx_v1Y7z3LAx2ZosC8Fh_qGObnKH06X3SfEL3xvER_ufXnYexOBwda27jD-7W1nThoHumOLgWcH1DsXEErPsPP2YMcf0zuHcV29ESyumZ9kzFlb44U-I8ZH-pEII6NsuYNh9dTV_zS9y4GVyadk8bUt1j7U1szAZmgEW7RjYZ4lTVg/designer_badge.png|https://hive.lumapps.com/lumacademy-training-portal/lumapps-designer-v2" //designer
+        };
+
+      render({
+          placement: placement.ABOVE,
+          target: targets.USER_PROFILE_ORG_CHART,
+          
+          toRenderWithContext: (context) => {
+            var finalHTML = "<div badge-section>"
+            var badgeString = "1|1|1" //this will be the context.user.....
+            var badgeArray = badgeString.split("|")
+
+            for (i = 0; i < badgeArray.length; i++) {
+                if (badgeArray[i] == "1") {
+                    badgeItem = badgeDict[i].split('|') //not badge array, need actual index item
+                    finalHTML += "<a href=\"" + badgeItem[1] +"\" target=\"_blank\" ><img class=\"badge-image\" src=\"" + badgeItem[0] +"\"></img></a>"
+                }
+            }
+            finalHTML += "</div>"
+              return Card({
+                  className: 'user-badge-card',
+                  children: [
+                    RawHTML ({
+                        html: finalHTML
+                      }),
+                  ],
+                  hasBackground: true
+              });
+          },
+      });
+  });
+  </script>
+<!--end-->
